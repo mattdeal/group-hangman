@@ -1,3 +1,7 @@
+* {
+	font-family: 'Titillium Web', sans-serif;
+}
+
 body {
 	background: linear-gradient(270deg, #000000, #6f7473);
 	background-size: 400% 400%;
@@ -7,10 +11,13 @@ body {
 	animation: AnimationName 8s ease infinite;
 }
 
-.jumbotron {
-	background: none;
+h1, h3 {
+	font-family: 'Titillium Web', sans-serif;
 }
 
+.border {
+	border: 10px solid white;
+}
 
 @-webkit-keyframes AnimationName {
     0%{background-position:0% 50%}
