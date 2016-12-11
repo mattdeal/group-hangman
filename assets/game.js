@@ -3,7 +3,7 @@ String.prototype.replaceAt=function(index, character) {
 };
 
 var game = {
-	bank : ['Celtics', 'Hawks', 'Magic', 'Lakers','Clippers'],
+	bank : ['Celtics', 'Hawks', 'Magic', 'Lakers','Clippers', 'Sixers', 'Bucks','Rockets','Hornets','Thunder',],
 	word: "",
 	mask: "",
 	lettersGuessed: [],
@@ -16,6 +16,11 @@ var game = {
 		 this.mask = Array(this.word.length+1).join("-");
 		 this.chances = 7;
 		 this.lettersGuessed = [];
+         document.getElementById("word").innerHTML= this.mask;
+         document.getElementById("guesses-remaining").innerHTML = "Guesses Remaining: " + this.chances;
+         document.getElementById("letters-guessed").innerHTML="Guessed: " + this.lettersGuessed;
+         document.getElementById("losses").innerHTML = "Losses: " + this.losses;
+         document.getElementById("wins").innerHTML="Wins: " + this.wins;
 	},
 	choice: function(input) {
 		if (this.chances > 0) {
@@ -29,6 +34,7 @@ var game = {
 
 
             	if (rep.length > 0) {
+                    console.log("got letter right")
                         for (i in rep) {
                             this.mask = this.mask.replaceAt(rep[i],input);
                             };
@@ -38,13 +44,15 @@ var game = {
                         document.getElementById("word").innerHTML= this.mask;
                          if (this.mask.indexOf("-") < 0) {
                             this.wins ++;
-                            this.bank.remove(this.word);
+                            console.log("got word right")
+                            this.bank.splice(this.bank.indexOf(this.word),1);
                             document.getElementById("wins").innerHTML="Wins: " + this.wins;
                             this.wordGrab();
                             }
 
                  	}
                 else {
+                    console.log("guess wrong")
                 this.lettersGuessed.push(input);
                 document.getElementById("letters-guessed").innerHTML="Guessed: " + this.lettersGuessed;
                 this.chances -= 1;                        
@@ -55,10 +63,12 @@ var game = {
                     
                     
                     } else {
+                        console.log("lost game");
                     	this.losses++;
                     	 document.getElementById("losses").innerHTML = "Losses: " + this.losses;
+                         this.wordGrab();
                         };
-                    	this.wordGrab();
+                    	
                     },
 			
 
